@@ -3,7 +3,9 @@
 // Generates realistic Philippine Logistics Enterprise Demo Data
 // ============================================================
 
+import 'dotenv/config';
 import { createDbClient } from '../client';
+
 import { tenants } from '../schema/tenants';
 import { users } from '../schema/users';
 import { shipments, trackingEvents } from '../schema/shipments';

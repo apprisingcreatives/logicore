@@ -9,11 +9,13 @@
     "generate": "drizzle-kit generate",
     "migrate": "drizzle-kit migrate",
     "seed": "tsx src/seed/seed.ts",
+    "push": "drizzle-kit push",
     "studio": "drizzle-kit studio",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "dotenv": "^17.4.2",
     "drizzle-orm": "^0.38.0",
     "postgres": "^3.4.0"
   },
