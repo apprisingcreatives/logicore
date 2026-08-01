@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Logicore Enterprise Design System & Dark Theme Core
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --color-primary: #0052CC;
+  --color-dark: #0A2540;
+  --color-accent: #00B8D9;
+  --color-bg: #0A2540;
+  --color-card: #102A45;
+  --color-border: #234B73;
+}
+
+@layer base {
+  body {
+    background-color: #0A2540;
+    color: #F4F5F7;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  code, kbd, pre {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Input, Textarea, Select text visibility fix */
+  input, textarea, select {
+    color: #F4F5F7 !important;
+    background-color: #173654;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: #8993A4 !important;
+  }
+}
+
+@layer components {
+  /* Input Fields */
+  .input-enterprise {
+    background-color: #173654;
+    border: 1px solid #234B73;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 14px;
+    color: #F4F5F7;
+    transition: all 0.2s ease;
+  }
+
+  .input-enterprise:focus {
+    outline: none;
+    border-color: #00B8D9;
+    box-shadow: 0 0 0 3px rgba(0, 184, 217, 0.2);
+  }
+
+  /* Glass Card */
+  .glass-card {
+    background-color: rgba(16, 42, 69, 0.85);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(35, 75, 115, 0.8);
+    border-radius: 12px;
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    background: linear-gradient(135deg, #00B8D9 0%, #3385FF 50%, #0052CC 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Status Indicators */
+  .status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .status-dot-active {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #00B8D9;
+    box-shadow: 0 0 8px #00B8D9;
+  }
+
+  /* KPI Card */
+  .kpi-card {
+    background-color: rgba(16, 42, 69, 0.85);
+    border: 1px solid rgba(35, 75, 115, 0.8);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.2s ease;
+  }
+
+  .kpi-card:hover {
+    border-color: #0052CC;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+}

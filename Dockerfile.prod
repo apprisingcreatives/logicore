@@ -1,0 +1,46 @@
+# Multi-stage Production Dockerfile for Logicore Platform
+
+# Stage 1: Base Pruning & Package Installation
+FROM node:20-alpine AS base
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+RUN npm install -g pnpm@9.15.4
+
+# Stage 2: Dependencies
+FROM base AS deps
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml* turbo.json ./
+COPY apps/api/package.json ./apps/api/package.json
+COPY apps/web/package.json ./apps/web/package.json
+COPY packages/domain/package.json ./packages/domain/package.json
+COPY packages/db/package.json ./packages/db/package.json
+COPY packages/shared/package.json ./packages/shared/package.json
+COPY packages/config/package.json ./packages/config/package.json
+RUN pnpm install --frozen-lockfile
+
+# Stage 3: Builder
+FROM deps AS builder
+COPY . .
+RUN pnpm build
+
+# Stage 4: API Production Runner
+FROM node:20-alpine AS api-runner
+WORKDIR /app
+ENV NODE_ENV=production
+RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nestjs
+COPY --from=builder /app/apps/api/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
+USER nestjs
+EXPOSE 4000
+CMD ["node", "dist/main"]
+
+# Stage 5: Web Production Runner
+FROM node:20-alpine AS web-runner
+WORKDIR /app
+ENV NODE_ENV=production
+RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
+COPY --from=builder /app/apps/web/.next ./apps/web/.next
+COPY --from=builder /app/apps/web/public ./apps/web/public
+COPY --from=builder /app/node_modules ./node_modules
+USER nextjs
+EXPOSE 3000
+CMD ["node_modules/.bin/next", "start", "apps/web"]

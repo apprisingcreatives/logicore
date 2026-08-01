@@ -1,0 +1,77 @@
+# ============================================================
+# Logicore — Local Development Services
+# ============================================================
+# Usage:
+#   pnpm docker:up      — Start all services
+#   pnpm docker:down    — Stop all services
+#   pnpm docker:reset   — Destroy volumes and restart fresh
+# ============================================================
+
+services:
+  # ── PostgreSQL 16 with pgvector ────────────────────────────
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: logicore-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: logicore_dev
+      POSTGRES_USER: logicore
+      POSTGRES_PASSWORD: logicore_dev_2024
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/init-extensions.sql:/docker-entrypoint-initdb.d/01-extensions.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U logicore -d logicore_dev"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Redis 7 ────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: logicore-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Adminer (DB GUI) ──────────────────────────────────────
+  adminer:
+    image: adminer:latest
+    container_name: logicore-adminer
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+      ADMINER_DESIGN: dracula
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # ── Redis Commander (Cache GUI) ────────────────────────────
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: logicore-redis-commander
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      REDIS_HOSTS: local:redis:6379
+    depends_on:
+      redis:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
