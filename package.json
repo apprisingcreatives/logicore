@@ -6,8 +6,9 @@
   "author": "Logicore",
   "license": "PROPRIETARY",
   "engines": {
-    "node": "20.x"
+    "node": "24.x"
   },
+
 
   "scripts": {
     "dev": "turbo dev",
