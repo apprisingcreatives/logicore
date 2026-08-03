@@ -12,7 +12,7 @@
 
   "scripts": {
     "dev": "turbo dev",
-    "build": "turbo build",
+    "build": "next build apps/web",
     "lint": "turbo lint",
     "test": "turbo test",
     "clean": "rimraf node_modules",
