@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import {
   Building2,
@@ -15,7 +16,7 @@ import {
   FileCheck,
 } from 'lucide-react';
 
-export default function OnboardingPage() {
+function OnboardingContent() {
   const searchParams = useSearchParams();
   const companyNameParam = searchParams.get('company') || 'Enterprise Logistics PH';
 
@@ -264,5 +265,13 @@ export default function OnboardingPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function OnboardingPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-surface flex items-center justify-center text-text-muted">Loading onboarding...</div>}>
+      <OnboardingContent />
+    </Suspense>
   );
 }

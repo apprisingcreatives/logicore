@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { ArrowRight, Lock, Mail, Building2, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Lock, Mail, Building2, ShieldCheck } from 'lucide-react';
+
 
 export default function LoginPage() {
   const [loginMode, setLoginMode] = useState<'company' | 'user'>('company');

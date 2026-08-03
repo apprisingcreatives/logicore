@@ -3,14 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import {
-  Building2,
-  MapPin,
-  ShieldCheck,
-  Truck,
   ArrowRight,
-  CheckCircle2,
-  ChevronRight,
-  Sparkles,
 } from 'lucide-react';
 
 export default function RegisterPage() {

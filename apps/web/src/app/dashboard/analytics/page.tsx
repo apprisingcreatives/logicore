@@ -1,6 +1,6 @@
 'use client';
 
-import { BarChart3, TrendingUp, DollarSign, PackageCheck, Ship, ShieldCheck, Download, Calendar } from 'lucide-react';
+import { BarChart3, TrendingUp, DollarSign, PackageCheck, ShieldCheck, Download } from 'lucide-react';
 
 export default function AnalyticsPage() {
   return (

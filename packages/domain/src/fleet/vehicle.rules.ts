@@ -53,6 +53,7 @@ export function estimateFuelCostPhp(
   if (consumption === undefined) return null;
 
   const fuelCost = FUEL_COST_PER_LITER_PHP[fuelType];
+  if (fuelCost === undefined) return null;
   const litersNeeded = (distanceKm / 100) * consumption;
   return litersNeeded * fuelCost;
 }

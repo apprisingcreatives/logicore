@@ -51,7 +51,7 @@ export class TrackingNumber extends ValueObject<TrackingNumberProps> {
     });
   }
 
-  toString(): string {
+  override toString(): string {
     return this.props.value;
   }
 }
@@ -102,7 +102,7 @@ export class ShipmentWeight extends ValueObject<ShipmentWeightProps> {
     return new ShipmentWeight({ valueKg: this.valueKg + other.valueKg });
   }
 
-  toString(): string {
+  override toString(): string {
     return `${this.valueKg.toFixed(2)} kg`;
   }
 }
@@ -170,7 +170,7 @@ export class ShipmentDimensions extends ValueObject<DimensionsProps> {
     return Result.ok(new ShipmentDimensions({ lengthCm, widthCm, heightCm }));
   }
 
-  toString(): string {
+  override toString(): string {
     return `${this.lengthCm} x ${this.widthCm} x ${this.heightCm} cm`;
   }
 }

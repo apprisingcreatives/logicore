@@ -9,7 +9,6 @@ import {
   text,
   timestamp,
   real,
-  integer,
   jsonb,
   index,
 } from 'drizzle-orm/pg-core';

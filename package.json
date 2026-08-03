@@ -4,10 +4,10 @@
   "private": true,
   "description": "AI-Powered Logistics Intelligence Platform for the Philippine logistics industry",
   "author": "Logicore",
-  "license": "PROPRIETARY",
   "engines": {
-    "node": "24.x"
+    "node": ">=18.0.0"
   },
+  "packageManager": "npm@10.8.2",
 
 
   "scripts": {

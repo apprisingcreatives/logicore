@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Brain, Send, Sparkles, Bot, User, ArrowRight, ShieldAlert, FileText, Compass } from 'lucide-react';
+import { Brain, Send, Sparkles, Bot, User, FileText } from 'lucide-react';
 import type { AiMessage } from '@logicore/shared';
 
 const initialMessages: AiMessage[] = [
@@ -44,8 +44,8 @@ export default function AiPage() {
     // Simulate AI Response
     setTimeout(() => {
       let aiReply = "I have analyzed your query across your active shipments and carrier networks.";
-      let actions = [];
-      let sources = [];
+      let actions: Array<{ label: string; action: string }> = [];
+      let sources: Array<{ type: 'shipment' | 'vehicle' | 'warehouse' | 'regulation'; id: string; title: string; relevanceScore: number }> = [];
 
       if (query.toLowerCase().includes('cebu') || query.toLowerCase().includes('delay')) {
         aiReply = "High sea swells near the Surigao Strait are causing a **4.2 hour average delay** for inter-island RoRo cargo traveling between Cebu and Davao. \n\n**Impacted assets:** 28 container packages on *MV RoRo Express 3*.\n**Recommended Action:** Notify end receivers or switch perishable items to domestic air freight via Mactan-Cebu International Airport.";

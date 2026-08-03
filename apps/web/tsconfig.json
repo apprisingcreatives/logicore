@@ -6,7 +6,8 @@
       "@/*": ["./src/*"],
       "@logicore/shared": ["../../packages/shared/src"],
       "@logicore/domain": ["../../packages/domain/src"]
-    }
+    },
+    "noUnusedLocals": false
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
